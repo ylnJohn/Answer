@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">满腹经纶</string>
+    <string name="question_primary">初级题</string>
+    <string name="question_middle">中级题</string>
+    <string name="question_high">高级题</string>
+    <string name="send_answer_error">请先选择好答案，再提交。</string>
+    <string name="answer_error">对不起回答错误，正确答案是:%s</string>
+    <string name="answer_success"></string>
+    <string name="settings_title">设置</string>
+    <string name="settings_score">我的记录</string>
+    <string name="settings_feedback">反馈</string>
+    <string name="settings_about">关于</string>
+</resources>
