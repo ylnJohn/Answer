@@ -42,7 +42,8 @@
     <RelativeLayout
         android:id="@+id/settings_rank"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
+        android:background="?android:attr/selectableItemBackground"
         >
         <ImageView
             android:id="@+id/rank_image"
@@ -78,7 +79,8 @@
     <RelativeLayout
         android:id="@+id/settings_feedback"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
+        android:background="?android:attr/selectableItemBackground"
         >
         <ImageView
             android:id="@+id/feedback_image"
@@ -115,7 +117,8 @@
     <RelativeLayout
         android:id="@+id/settings_about"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
+        android:background="?android:attr/selectableItemBackground"
         >
         <ImageView
             android:id="@+id/about_image"
@@ -130,6 +133,44 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_about"
             android:layout_toRightOf="@id/about_image"
+            android:textColor="#505050"
+            android:textSize="22sp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/placeview_right"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#505050"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/settings_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="?android:attr/selectableItemBackground"
+        >
+        <ImageView
+            android:id="@+id/recommend_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_recommend"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_recommend"
+            android:layout_toRightOf="@id/recommend_image"
             android:textColor="#505050"
             android:textSize="22sp"
             android:layout_marginLeft="5dp"

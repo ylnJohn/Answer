@@ -56,16 +56,16 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/icon_score"
-            android:layout_centerHorizontal="true"
+            android:layout_toLeftOf="@+id/question_score"
+            android:layout_marginRight="5dp"
             />
         <TextView
             android:id="@+id/question_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/question_score_image"
-            android:layout_alignTop="@id/question_score_image"
-            android:layout_marginLeft="5dp"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
             android:textColor="@color/yellow"
             android:gravity="bottom"
             android:textSize="18sp"/>
@@ -75,21 +75,22 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/icon_time"
-            android:layout_centerHorizontal="true"
+            android:layout_toLeftOf="@+id/question_time"
             android:layout_below="@id/question_score_image"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
             />
         <TextView
             android:id="@+id/question_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/question_time_image"
-            android:layout_alignTop="@id/question_time_image"
-            android:layout_marginLeft="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/question_score_image"
+            android:layout_marginTop="10dp"
             android:gravity="bottom"
             android:textColor="@color/yellow"
             android:textSize="18sp"
-            android:layout_marginTop="2dp"
             android:text="30"/>
 
         <ImageView
@@ -97,8 +98,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/icon_share"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 
@@ -106,7 +106,7 @@
         android:id="@+id/question_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="28sp"
+        android:textSize="25sp"
         android:lineSpacingExtra="2dp"
         android:lineSpacingMultiplier="1.2"
         android:padding="10dp"
@@ -157,9 +157,19 @@
     <Button
         android:id="@+id/send_button"
         android:layout_width="180dp"
-        android:layout_height="80dp"
-        android:background="@drawable/icon_blue_btn"
-        android:text="Send"
+        android:layout_height="58dp"
+        android:background="@drawable/button_normal_selector"
+        android:text="@string/send_button"
+        android:textColor="@color/crimson"
         android:textSize="30sp"
         android:layout_gravity="center_horizontal|bottom"/>
+
+    <LinearLayout
+        android:id="@+id/ll_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+    </LinearLayout>
 </LinearLayout>

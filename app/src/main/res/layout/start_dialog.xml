@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:minHeight="300dp"
+    android:background="@drawable/delete_dialog_shape">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="22sp"
+        android:textColor="#505050"
+        android:text="@string/start_dialog_title"
+        android:layout_margin="10dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#ededed"
+        />
+
+    <Button
+        android:id="@+id/start_primary"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="@string/question_primary"
+        android:textSize="18sp"
+        android:background="@drawable/button_normal_selector"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"/>
+    <Button
+        android:id="@+id/start_middle"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="@string/question_middle"
+        android:textSize="18sp"
+        android:background="@drawable/button_normal_selector"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/start_high"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="@string/question_high"
+        android:textSize="18sp"
+        android:background="@drawable/button_normal_selector"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"/>
+
+</LinearLayout>

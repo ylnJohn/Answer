@@ -1,13 +1,25 @@
 <resources>
     <string name="app_name">满腹经纶</string>
-    <string name="question_primary">初级题</string>
-    <string name="question_middle">中级题</string>
-    <string name="question_high">高级题</string>
+    <string name="question_primary">学渣题</string>
+    <string name="question_middle">学霸题</string>
+    <string name="question_high">学神题</string>
     <string name="send_answer_error">请先选择好答案，再提交。</string>
-    <string name="answer_error">对不起回答错误，正确答案是:%s</string>
-    <string name="answer_success"></string>
+    <string name="answer_error">回答错误，正确答案是:%s,下次继续努力吧!</string>
+    <string name="answer_time_error">对不起答题时间到，下次继续努力吧!</string>
+    <string name="answer_success">恭喜你，成功通关!已经为你解锁下一个关卡，请继续挑战吧!</string>
+    <string name="adward_tips">获取勋章:</string>
     <string name="settings_title">设置</string>
     <string name="settings_score">我的记录</string>
     <string name="settings_feedback">反馈</string>
     <string name="settings_about">关于</string>
+    <string name="settings_recommend">推荐</string>
+    <string name="start_dialog_title">请选择关卡</string>
+    <string name="version_text">版本号:%s</string>
+    <string name="contact_text">联系方式:%s</string>
+    <string name="my_rank">我的最高纪录:</string>
+    <string name="my_award">我的勋章:</string>
+    <string name="confirm_button">确定</string>
+    <string name="send_button">提交</string>
+    <string name="share_title">分享</string>
+    <string name="share_content">%s(来自:满腹经纶APP)</string>
 </resources>

@@ -4,12 +4,15 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.yln.answer"
+        applicationId "com.yln.question"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
     }
     buildTypes {
         release {
@@ -17,11 +20,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    compile(name: 'alicloud-android-feedback-3.1.1', ext: 'aar')
+    compile files('libs/alicloud-android-monitor-2.5.1.1_for_bc_proguard.jar')
+    compile files('libs/utdid4all-1.1.5.3_proguard.jar')
+    compile files('libs/alicloud-android-utils-1.0.3.jar')
+    compile files('libs/miadtracker.jar')
+    compile name: 'YoumiSdk_v7.5.0_2017-07-18', ext: 'aar'
+    compile project(':PushSDK')
 }

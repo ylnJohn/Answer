@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yln.answer"
-    android:versionCode="2017101311"
-    android:versionName="1.0.0">
+    package="com.yln.question"
+    android:versionCode="2017101717"
+    android:versionName="1.1">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:debuggable="false"
+        android:name=".MyApplication"
         >
         <activity android:name=".StartActivity"
             android:screenOrientation="portrait"
@@ -24,6 +28,18 @@
 
         <activity android:name=".MainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".SettingsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".AboutActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".RankActivity" android:screenOrientation="portrait"></activity>
+
+        <meta-data android:value="59e4676e9f06fd47cf00009a" android:name="UMENG_APPKEY"/>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="d79da748a846160d0d024510d91c377b">
+        </meta-data>
+        <meta-data
+            android:name="YOUMI_CHANNEL"
+            android:value="11030" >
+        </meta-data>
     </application>
 
 </manifest>
