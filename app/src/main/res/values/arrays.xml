@@ -36,6 +36,11 @@
         <item>p33</item>
         <item>p34</item>
         <item>p35</item>
+        <item>p36</item>
+        <item>p37</item>
+        <item>p38</item>
+        <item>p39</item>
+        <item>p40</item>
     </string-array>
     <string-array name="middle">
         <item>m01</item>
@@ -73,6 +78,11 @@
         <item>m33</item>
         <item>m34</item>
         <item>m35</item>
+        <item>m36</item>
+        <item>m37</item>
+        <item>m38</item>
+        <item>m39</item>
+        <item>m40</item>
     </string-array>
     <string-array name="high">
         <item>h01</item>
@@ -105,5 +115,9 @@
         <item>h28</item>
         <item>h29</item>
         <item>h30</item>
+        <item>h31</item>
+        <item>h32</item>
+        <item>h33</item>
+        <item>h34</item>
     </string-array>
 </resources>

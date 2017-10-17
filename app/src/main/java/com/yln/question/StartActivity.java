@@ -223,8 +223,9 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
         // 如果有需要，可以点击后退关闭插播广告。
         if (SpotManager.getInstance(getApplicationContext()).isSpotShowing()) {
             SpotManager.getInstance(getApplicationContext()).hideSpot();
+        }else {
+            finish();
         }
-        finish();
     }
 
     @Override

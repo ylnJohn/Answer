@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_game">
 
     <RelativeLayout
+        android:id="@+id/question_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -112,12 +112,14 @@
         android:padding="10dp"
         android:text="text"
         android:textStyle="bold"
+        android:layout_below="@id/question_header"
         />
 
     <RadioGroup
         android:id="@+id/question_items_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/question_content"
         android:orientation="vertical"
         android:padding="20dp">
         <RadioButton
@@ -158,11 +160,12 @@
         android:id="@+id/send_button"
         android:layout_width="180dp"
         android:layout_height="58dp"
+        android:layout_below="@id/question_items_group"
         android:background="@drawable/button_normal_selector"
         android:text="@string/send_button"
         android:textColor="@color/crimson"
         android:textSize="30sp"
-        android:layout_gravity="center_horizontal|bottom"/>
+        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:id="@+id/ll_banner"
@@ -170,6 +173,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_gravity="bottom">
+        android:layout_alignParentBottom="true">
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
