@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private String[] questions,tips;
     private Context mContext;
     private SharedPreferences sp;
+    private boolean isPause=false;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler=new Handler(){
@@ -296,6 +297,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             player.stop();
             player.release();
             player = null;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(!isPause) {
+            mHandler.removeMessages(0);
+            isPause = true;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isPause) {
+            mHandler.sendEmptyMessageDelayed(0, 1000);
+            isPause=false;
         }
     }
 }
