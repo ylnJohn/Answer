@@ -7,6 +7,8 @@
     <string name="answer_error">回答错误，正确答案是:%s,下次继续努力吧!</string>
     <string name="answer_time_error">对不起答题时间到，下次继续努力吧!</string>
     <string name="answer_success">恭喜你，成功通关!已经为你解锁下一个关卡，请继续挑战吧!</string>
+    <string name="answer_all_success">恭喜你，已经通关所有关卡，我已经阻止不了你了!</string>
+    <string name="score_save">恭喜你，创造了新的记录...</string>
     <string name="adward_tips">获取勋章:</string>
     <string name="settings_title">设置</string>
     <string name="settings_score">我的记录</string>

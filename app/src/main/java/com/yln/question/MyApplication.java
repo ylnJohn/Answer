@@ -1,6 +1,7 @@
 package com.yln.question;
 
 import android.app.Application;
+import android.graphics.Typeface;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.umeng.message.IUmengRegisterCallback;
@@ -8,6 +9,8 @@ import com.umeng.message.PushAgent;
 
 import net.youmi.android.nm.sp.SpotManager;
 import net.youmi.android.nm.sp.SpotRequestListener;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by linnan.yao on 2017/10/16.
@@ -44,6 +47,18 @@ public class MyApplication extends Application{
 
             }
         });
+        //设置全局字体
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "Roboto-Regular.ttf");
+        try {
+            Field field = Typeface.class.getDeclaredField("SERIF");
+            field.setAccessible(true);
+            field.set(null, tf);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

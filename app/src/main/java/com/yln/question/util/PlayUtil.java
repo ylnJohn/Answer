@@ -10,6 +10,13 @@
 
 package com.yln.question.util;
 
+import android.content.Context;
+import android.media.MediaPlayer;
+
+import com.yln.question.R;
+
+import java.io.IOException;
+
 /**
  * descrition：
  * 
@@ -21,36 +28,36 @@ package com.yln.question.util;
  */
 public class PlayUtil {
 
-//	public static void playWin(MediaPlayer player, Context context) {
-//		player = MediaPlayer.create(context, R.raw.win);
-//		player.setLooping(false);
-//		if (!player.isPlaying()) {
-//			try {
-//				player.prepare();
-//				player.start();
-//			} catch (IllegalStateException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//	}
-//
-//	public static void playLoss(MediaPlayer player, Context context) {
-//		player = MediaPlayer.create(context, R.raw.loss);
-//		player.setLooping(false);
-//		if (!player.isPlaying()) {
-//			try {
-//				player.prepare();
-//				player.start();
-//			} catch (IllegalStateException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//	}
+	public static void playWin(MediaPlayer player, Context context) {
+		player = MediaPlayer.create(context, R.raw.win);
+		player.setLooping(false);
+		if (!player.isPlaying()) {
+			try {
+				player.prepare();
+				player.start();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void playLoss(MediaPlayer player, Context context) {
+		player = MediaPlayer.create(context, R.raw.loss);
+		player.setLooping(false);
+		if (!player.isPlaying()) {
+			try {
+				player.prepare();
+				player.start();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 }

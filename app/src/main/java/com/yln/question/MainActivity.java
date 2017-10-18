@@ -20,9 +20,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
+import com.yln.question.util.PlayUtil;
 import com.yln.question.util.ToastUtil;
 import com.yln.question.util.Util;
 
@@ -87,18 +89,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         check = getIntent().getIntExtra("check", SystemConfig.PRIMARY);
         switch (check) {
             case SystemConfig.PRIMARY:
+                score=100;
                 questions = getResources().getStringArray(R.array.primary);
                 length = questions.length;
                 isSelected = new boolean[length];
                 mTitleTV.setText(R.string.question_primary);
                 break;
             case SystemConfig.MIDDLE:
+                score=100+getResources().getStringArray(R.array.primary).length*10;
                 questions = getResources().getStringArray(R.array.middle);
                 length = questions.length;
                 isSelected = new boolean[length];
                 mTitleTV.setText(R.string.question_middle);
                 break;
             case SystemConfig.HIGH:
+                score=100+getResources().getStringArray(R.array.primary).length*10+getResources().getStringArray(R.array.middle).length*20;
                 questions = getResources().getStringArray(R.array.high);
                 length = questions.length;
                 isSelected = new boolean[length];
@@ -106,6 +111,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
         }
         refresh();
+//        score=sp.getInt(SystemConfig.SHARE_SCORE,100);
+        mScoreTV.setText(score+"");
         // 获取广告条
         View bannerView = BannerManager.getInstance(getApplicationContext())
                 .getBannerView(this, new BannerViewListener() {
@@ -143,12 +150,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         if (choice >= length) {
             //统计通关
             MobclickAgent.onEvent(this,SystemConfig.COMPLATE_EVENT,mTitleTV.getText().toString());
-            showDialog(false,getResources().getString(R.string.answer_success));
-//            PlayUtil.playWin(player, GameActivity.this);
-//            return;
+            showDialog(true,getResources().getString(R.string.answer_success));
+            PlayUtil.playWin(player, mContext);
+            return;
         }
         mItemsGroup.clearCheck();
-        mScoreTV.setText(score+"");
         int index = 0;
         do {
             index = random.nextInt(length);
@@ -201,7 +207,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     String str= String.format(getResources().getString(R.string.answer_error),s);
 //                    ToastUtil.showToast(view.getContext(), str);
                     showDialog(false,str);
-//                    PlayUtil.playLoss(player, view.getContext());
+                    PlayUtil.playLoss(player, view.getContext());
                 }
                 break;
             case R.id.share_button:
@@ -218,24 +224,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         dialog.setContentView(view);
         dialog.setCancelable(false);
         TextView message= (TextView) view.findViewById(R.id.answer_message);
-        LinearLayout content= (LinearLayout) view.findViewById(R.id.answer_content);
+        RelativeLayout content= (RelativeLayout) view.findViewById(R.id.answer_content);
         ImageView adward= (ImageView) view.findViewById(R.id.adward_image);
         ImageView image= (ImageView) view.findViewById(R.id.answer_icon);
         Button confirm= (Button) view.findViewById(R.id.confirm_button);
+        int level=sp.getInt(SystemConfig.SHARE_LEVEL,SystemConfig.PRIMARY);
         int height=220;
         if(success){
             image.setImageResource(R.drawable.icon_success);
             content.setVisibility(View.VISIBLE);
             if(check==SystemConfig.PRIMARY) {
                 adward.setImageResource(R.drawable.icon_rank_1);
+                if(level<SystemConfig.MIDDLE)
+                    sp.edit().putInt(SystemConfig.SHARE_LEVEL,SystemConfig.MIDDLE).commit();
             }
             else if(check==SystemConfig.MIDDLE){
                 adward.setImageResource(R.drawable.icon_rank_2);
+                if(level<SystemConfig.HIGH)
+                    sp.edit().putInt(SystemConfig.SHARE_LEVEL,SystemConfig.HIGH).commit();
             }
             else if(check==SystemConfig.HIGH){
                 adward.setImageResource(R.drawable.icon_rank_3);
+                msg=getResources().getString(R.string.answer_all_success);
             }
-            sp.edit().putInt(SystemConfig.SHARE_LEVEL,check).commit();
             height=300;
         }else{
             image.setImageResource(R.drawable.icon_failtrue);
@@ -261,6 +272,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         int s=sp.getInt(SystemConfig.SHARE_SCORE,0);
         if(score>s){
             sp.edit().putInt(SystemConfig.SHARE_SCORE,score).commit();
+            ToastUtil.showToast(mContext,R.string.score_save);
         }
     }
 
@@ -280,5 +292,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         super.onDestroy();
         BannerManager.getInstance(getApplicationContext()).onDestroy();
         mHandler.removeCallbacksAndMessages(null);
+        if (player != null) {
+            player.stop();
+            player.release();
+            player = null;
+        }
     }
 }

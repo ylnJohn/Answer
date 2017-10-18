@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="question_header_top">15dp</dimen>
+    <dimen name="question_header_bottom">5dp</dimen>
+    <dimen name="question_group_padding">5dp</dimen>
+    <dimen name="question_content_size">20sp</dimen>
+    <dimen name="question_item_size">22sp</dimen>
+</resources>

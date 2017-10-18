@@ -58,6 +58,7 @@
         android:layout_toRightOf="@id/rank_title"
         android:layout_alignTop="@id/rank_title"
         android:layout_marginLeft="10dp"
+        android:textStyle="bold"
         />
 
     <TextView

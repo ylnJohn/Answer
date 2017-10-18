@@ -193,7 +193,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
             }
         });
         SharedPreferences sp=mContext.getSharedPreferences(SystemConfig.PREFERENCES, Activity.MODE_PRIVATE);
-        int level=sp.getInt(SystemConfig.SHARE_LEVEL,0);
+        int level=sp.getInt(SystemConfig.SHARE_LEVEL,SystemConfig.PRIMARY);
         switch (level){
             case SystemConfig.PRIMARY:
                 primary.setEnabled(true);
