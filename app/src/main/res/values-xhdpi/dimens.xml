@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="question_header_top">20dp</dimen>
+    <dimen name="question_header_bottom">20dp</dimen>
+    <dimen name="question_group_padding">15dp</dimen>
+    <dimen name="question_content_size">22sp</dimen>
+    <dimen name="question_item_size">25sp</dimen>
+</resources>

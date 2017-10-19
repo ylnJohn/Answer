@@ -16,6 +16,8 @@ public class SystemConfig {
 
 	public static final String COMPLATE_EVENT="event01";
 
+	public static final String RANK_EVENT="event02";
+
 	public static final String PREFERENCES="question";
 
 	public static final String SHARE_LEVEL="level";

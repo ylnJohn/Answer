@@ -2,6 +2,7 @@ package com.yln.question;
 
 import android.app.Application;
 import android.graphics.Typeface;
+import android.util.Log;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.umeng.message.IUmengRegisterCallback;
@@ -29,6 +30,7 @@ public class MyApplication extends Application{
             @Override
             public void onSuccess(String deviceToken) {
                 //注册成功会返回device token
+                Log.i("yaolinnan","pushAgent token:"+deviceToken);
             }
 
             @Override
@@ -36,6 +38,7 @@ public class MyApplication extends Application{
 
             }
         });
+        mPushAgent.setDebugMode(false);
         SpotManager.getInstance(this).requestSpot(new SpotRequestListener() {
             @Override
             public void onRequestSuccess() {
@@ -44,7 +47,7 @@ public class MyApplication extends Application{
 
             @Override
             public void onRequestFailed(int i) {
-
+                Log.i("yaolinnan","spot error:"+i);
             }
         });
         //设置全局字体

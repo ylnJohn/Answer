@@ -129,7 +129,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
                     @Override
                     public void onRequestFailed() {
-
+                        Log.i("yaolinnan","banner error");
                     }
                 });
 

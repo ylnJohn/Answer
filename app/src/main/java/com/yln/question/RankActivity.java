@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 /**
  * Created by linnan.yao on 2017/10/17.
  */
@@ -32,6 +34,7 @@ public class RankActivity extends BaseActivity{
         SharedPreferences sp=getSharedPreferences(SystemConfig.PREFERENCES, Activity.MODE_PRIVATE);
         int rank=sp.getInt(SystemConfig.SHARE_SCORE,0);
         mRankTV.setText(rank+"");
+        MobclickAgent.onEvent(this,SystemConfig.RANK_EVENT,mRankTV.getText().toString());
         int level=sp.getInt(SystemConfig.SHARE_LEVEL,0);
         switch (level){
             case 1:

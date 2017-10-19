@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.yln.question.util.PermissionHelper;
 import com.yln.question.util.Random;
 import com.yln.question.util.Util;
 
 import net.youmi.android.AdManager;
 import net.youmi.android.nm.bn.BannerManager;
 import net.youmi.android.nm.bn.BannerViewListener;
+import net.youmi.android.nm.cm.ErrorCode;
 import net.youmi.android.nm.sp.SpotListener;
 import net.youmi.android.nm.sp.SpotManager;
 import net.youmi.android.os.OffersManager;
@@ -39,6 +42,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
     private Context mContext;
     private AnimatorSet set=new AnimatorSet();
     private Random random=new Random();
+    private PermissionHelper mPermissionHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,30 +53,36 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
         mGameIV.setOnClickListener(this);
         mSettingsIV.setOnClickListener(this);
         mContext=this;
-        AdManager.getInstance(getApplicationContext()).init(SystemConfig.AD_APPID, SystemConfig.AD_SECRET, true);
-        SpotManager.getInstance(getApplicationContext()).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
-        SpotManager.getInstance(getApplicationContext()).showSpot(mContext,
-                new SpotListener() {
-                    @Override
-                    public void onShowSuccess() {
+        mPermissionHelper=new PermissionHelper(this);
+        mPermissionHelper.setOnApplyPermissionListener(new PermissionHelper.OnApplyPermissionListener() {
+            @Override
+            public void onAfterApplyAllPermission() {
+                AdManager.getInstance(getApplicationContext()).init(SystemConfig.AD_APPID, SystemConfig.AD_SECRET, true);
+                SpotManager.getInstance(getApplicationContext()).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
+                SpotManager.getInstance(getApplicationContext()).showSpot(mContext,
+                        new SpotListener() {
+                            @Override
+                            public void onShowSuccess() {
 
-                    }
+                            }
 
-                    @Override
-                    public void onShowFailed(int i) {
+                            @Override
+                            public void onShowFailed(int i) {
+                                Log.i("yaolinnan","spot error:"+i);
+                            }
 
-                    }
+                            @Override
+                            public void onSpotClosed() {
 
-                    @Override
-                    public void onSpotClosed() {
+                            }
 
-                    }
+                            @Override
+                            public void onSpotClicked(boolean b) {
 
-                    @Override
-                    public void onSpotClicked(boolean b) {
-
-                    }
-                });
+                            }
+                        });
+            }
+        });
 //        // 获取广告条
 //        View bannerView = BannerManager.getInstance(getApplicationContext())
 //                .getBannerView(mContext, new BannerViewListener() {
@@ -260,5 +270,17 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
         set.end();
         set=null;
         random=null;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mPermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mPermissionHelper.onActivityResult(requestCode, resultCode, data);
     }
 }
