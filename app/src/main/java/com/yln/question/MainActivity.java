@@ -22,6 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.umeng.analytics.MobclickAgent;
@@ -116,6 +117,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         // 获取广告条
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Log.i("yaolinnan","onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                Log.i("yaolinnan","onAdFailedToLoad:"+i);
+            }
+        });
         mAdView.loadAd(adRequest);
 //        View bannerView = BannerManager.getInstance(getApplicationContext())
 //                .getBannerView(this, new BannerViewListener() {

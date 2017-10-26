@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,9 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.yln.question.util.Random;
@@ -34,6 +37,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
     private Random random=new Random();
 //    private PermissionHelper mPermissionHelper;
     private InterstitialAd ad;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,20 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
         MobileAds.initialize(getApplicationContext(),SystemConfig.AD_ID);
         ad=new InterstitialAd(mContext);
         ad.setAdUnitId(SystemConfig.START_AD_ID);
+        ad.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Log.i("yaolinnan","onAdLoaded");
+                ad.show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                Log.i("yaolinnan","onAdFailedToLoad:"+i);
+            }
+        });
         ad.loadAd(new AdRequest.Builder().build());
 //        mPermissionHelper=new PermissionHelper(this);
 //        mPermissionHelper.setOnApplyPermissionListener(new PermissionHelper.OnApplyPermissionListener() {
@@ -79,28 +97,9 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
 //            }
 //        });
 //        // 获取广告条
-//        View bannerView = BannerManager.getInstance(getApplicationContext())
-//                .getBannerView(mContext, new BannerViewListener() {
-//                    @Override
-//                    public void onRequestSuccess() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onSwitchBanner() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onRequestFailed() {
-//
-//                    }
-//                });
-//
-//        // 获取要嵌入广告条的布局
-//        LinearLayout bannerLayout = (LinearLayout) findViewById(R.id.ll_banner);
-//        // 将广告条加入到布局中
-//        bannerLayout.addView(bannerView);
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 //        OffersManager.getInstance(getApplicationContext()).onAppLaunch();
     }
 
@@ -239,6 +238,9 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
         // 插屏广告
 //        SpotManager.getInstance(getApplicationContext()).onPause();
         set.removeAllListeners();
+        if (mAdView != null) {
+            mAdView.pause();
+        }
     }
 
     @Override
@@ -252,11 +254,17 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
     protected void onResume() {
         super.onResume();
         startAnimator();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         // 插屏广告
 //        SpotManager.getInstance(getApplicationContext()).onDestroy();
 //        BannerManager.getInstance(getApplicationContext()).onDestroy();
