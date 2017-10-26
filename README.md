@@ -5,3 +5,5 @@
 数据统计SDK：http://mobile.umeng.com/apps
 
 消息推送SDK：http://push.umeng.com/59e4676e9f06fd47cf00009a/msgList
+
+广告SDK：https://developers.google.com/admob/android/quick-start?hl=zh-CN
