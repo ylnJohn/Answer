@@ -157,6 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:background="?android:attr/selectableItemBackground"
+        android:visibility="gone"
         >
         <ImageView
             android:id="@+id/recommend_image"

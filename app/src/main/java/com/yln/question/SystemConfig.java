@@ -30,4 +30,10 @@ public class SystemConfig {
 
 	public static final String CONTACT="QQ:2646684971";
 
+	public static final String AD_ID="ca-app-pub-9957708930248817~9234422732";
+
+	public static final String START_AD_ID="ca-app-pub-9957708930248817/1397608397";
+
+	public static final String BANNER_AD_ID="ca-app-pub-9957708930248817/4159503109";
+
 }

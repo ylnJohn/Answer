@@ -8,8 +8,6 @@ import android.widget.RelativeLayout;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 
-import net.youmi.android.os.OffersManager;
-
 /**
  * Created by linnan.yao on 2017/10/13.
  */
@@ -46,7 +44,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                 FeedbackAPI.openFeedbackActivity();
                 break;
             case R.id.settings_recommend:
-                OffersManager.getInstance(getApplicationContext()).showOffersWall();
+//                OffersManager.getInstance(getApplicationContext()).showOffersWall();
                 break;
             case R.id.settings_rank:
                 Intent intent=new Intent(this,RankActivity.class);

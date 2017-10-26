@@ -1,6 +1,5 @@
 package com.yln.question;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -9,28 +8,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.yln.question.util.PermissionHelper;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.yln.question.util.Random;
 import com.yln.question.util.Util;
-
-import net.youmi.android.AdManager;
-import net.youmi.android.nm.bn.BannerManager;
-import net.youmi.android.nm.bn.BannerViewListener;
-import net.youmi.android.nm.cm.ErrorCode;
-import net.youmi.android.nm.sp.SpotListener;
-import net.youmi.android.nm.sp.SpotManager;
-import net.youmi.android.os.OffersManager;
 
 /**
  * Created by linnan.yao on 2017/10/13.
@@ -42,7 +32,8 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
     private Context mContext;
     private AnimatorSet set=new AnimatorSet();
     private Random random=new Random();
-    private PermissionHelper mPermissionHelper;
+//    private PermissionHelper mPermissionHelper;
+    private InterstitialAd ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,36 +44,40 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
         mGameIV.setOnClickListener(this);
         mSettingsIV.setOnClickListener(this);
         mContext=this;
-        mPermissionHelper=new PermissionHelper(this);
-        mPermissionHelper.setOnApplyPermissionListener(new PermissionHelper.OnApplyPermissionListener() {
-            @Override
-            public void onAfterApplyAllPermission() {
-                AdManager.getInstance(getApplicationContext()).init(SystemConfig.AD_APPID, SystemConfig.AD_SECRET, true);
-                SpotManager.getInstance(getApplicationContext()).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
-                SpotManager.getInstance(getApplicationContext()).showSpot(mContext,
-                        new SpotListener() {
-                            @Override
-                            public void onShowSuccess() {
-
-                            }
-
-                            @Override
-                            public void onShowFailed(int i) {
-                                Log.i("yaolinnan","spot error:"+i);
-                            }
-
-                            @Override
-                            public void onSpotClosed() {
-
-                            }
-
-                            @Override
-                            public void onSpotClicked(boolean b) {
-
-                            }
-                        });
-            }
-        });
+        MobileAds.initialize(getApplicationContext(),SystemConfig.AD_ID);
+        ad=new InterstitialAd(mContext);
+        ad.setAdUnitId(SystemConfig.START_AD_ID);
+        ad.loadAd(new AdRequest.Builder().build());
+//        mPermissionHelper=new PermissionHelper(this);
+//        mPermissionHelper.setOnApplyPermissionListener(new PermissionHelper.OnApplyPermissionListener() {
+//            @Override
+//            public void onAfterApplyAllPermission() {
+//                AdManager.getInstance(getApplicationContext()).init(SystemConfig.AD_APPID, SystemConfig.AD_SECRET, true);
+//                SpotManager.getInstance(getApplicationContext()).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
+//                SpotManager.getInstance(getApplicationContext()).showSpot(mContext,
+//                        new SpotListener() {
+//                            @Override
+//                            public void onShowSuccess() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onShowFailed(int i) {
+//                                Log.i("yaolinnan","spot error:"+i);
+//                            }
+//
+//                            @Override
+//                            public void onSpotClosed() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onSpotClicked(boolean b) {
+//
+//                            }
+//                        });
+//            }
+//        });
 //        // 获取广告条
 //        View bannerView = BannerManager.getInstance(getApplicationContext())
 //                .getBannerView(mContext, new BannerViewListener() {
@@ -228,21 +223,21 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
         dialog.show();
     }
 
-    @Override
-    public void onBackPressed() {
+//    @Override
+//    public void onBackPressed() {
         // 如果有需要，可以点击后退关闭插播广告。
-        if (SpotManager.getInstance(getApplicationContext()).isSpotShowing()) {
-            SpotManager.getInstance(getApplicationContext()).hideSpot();
-        }else {
-            finish();
-        }
-    }
+//        if (SpotManager.getInstance(getApplicationContext()).isSpotShowing()) {
+//            SpotManager.getInstance(getApplicationContext()).hideSpot();
+//        }else {
+//            finish();
+//        }
+//    }
 
     @Override
     protected void onPause() {
         super.onPause();
         // 插屏广告
-        SpotManager.getInstance(getApplicationContext()).onPause();
+//        SpotManager.getInstance(getApplicationContext()).onPause();
         set.removeAllListeners();
     }
 
@@ -250,7 +245,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
     protected void onStop() {
         super.onStop();
         // 插屏广告
-        SpotManager.getInstance(getApplicationContext()).onStop();
+//        SpotManager.getInstance(getApplicationContext()).onStop();
     }
 
     @Override
@@ -263,24 +258,24 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
     protected void onDestroy() {
         super.onDestroy();
         // 插屏广告
-        SpotManager.getInstance(getApplicationContext()).onDestroy();
-        BannerManager.getInstance(getApplicationContext()).onDestroy();
-        OffersManager.getInstance(getApplicationContext()).onAppExit();
+//        SpotManager.getInstance(getApplicationContext()).onDestroy();
+//        BannerManager.getInstance(getApplicationContext()).onDestroy();
+//        OffersManager.getInstance(getApplicationContext()).onAppExit();
         mGameIV.clearAnimation();
         set.end();
         set=null;
         random=null;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        mPermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mPermissionHelper.onActivityResult(requestCode, resultCode, data);
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        mPermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        mPermissionHelper.onActivityResult(requestCode, resultCode, data);
+//    }
 }

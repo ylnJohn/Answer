@@ -33,6 +33,10 @@
         <activity android:name=".AboutActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".RankActivity" android:screenOrientation="portrait"></activity>
 
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+
         <meta-data android:value="59e4676e9f06fd47cf00009a" android:name="UMENG_APPKEY"/>
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"

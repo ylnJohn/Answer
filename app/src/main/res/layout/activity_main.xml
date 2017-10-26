@@ -166,12 +166,22 @@
         android:textSize="30sp"
         android:layout_centerHorizontal="true"/>
 
-    <LinearLayout
-        android:id="@+id/ll_banner"
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll_banner"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_alignParentBottom="true">-->
+    <!--</LinearLayout>-->
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-9957708930248817/4159503109">
+    </com.google.android.gms.ads.AdView>
 </RelativeLayout>

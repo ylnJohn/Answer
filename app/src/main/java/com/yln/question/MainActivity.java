@@ -17,19 +17,17 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.umeng.analytics.MobclickAgent;
 import com.yln.question.util.PlayUtil;
 import com.yln.question.util.ToastUtil;
 import com.yln.question.util.Util;
-
-import net.youmi.android.nm.bn.BannerManager;
-import net.youmi.android.nm.bn.BannerViewListener;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -49,6 +47,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private Context mContext;
     private SharedPreferences sp;
     private boolean isPause=false;
+    private AdView mAdView;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler=new Handler(){
@@ -115,28 +114,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 //        score=sp.getInt(SystemConfig.SHARE_SCORE,100);
         mScoreTV.setText(score+"");
         // 获取广告条
-        View bannerView = BannerManager.getInstance(getApplicationContext())
-                .getBannerView(this, new BannerViewListener() {
-                    @Override
-                    public void onRequestSuccess() {
-
-                    }
-
-                    @Override
-                    public void onSwitchBanner() {
-
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        Log.i("yaolinnan","banner error");
-                    }
-                });
-
-        // 获取要嵌入广告条的布局
-        LinearLayout bannerLayout = (LinearLayout) findViewById(R.id.ll_banner);
-        // 将广告条加入到布局中
-        bannerLayout.addView(bannerView);
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+//        View bannerView = BannerManager.getInstance(getApplicationContext())
+//                .getBannerView(this, new BannerViewListener() {
+//                    @Override
+//                    public void onRequestSuccess() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSwitchBanner() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onRequestFailed() {
+//                        Log.i("yaolinnan","banner error");
+//                    }
+//                });
+//
+//        // 获取要嵌入广告条的布局
+//        LinearLayout bannerLayout = (LinearLayout) findViewById(R.id.ll_banner);
+//        // 将广告条加入到布局中
+//        bannerLayout.addView(bannerView);
     }
 
 
@@ -291,7 +293,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BannerManager.getInstance(getApplicationContext()).onDestroy();
+//        BannerManager.getInstance(getApplicationContext()).onDestroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         mHandler.removeCallbacksAndMessages(null);
         if (player != null) {
             player.stop();
@@ -307,6 +312,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             mHandler.removeMessages(0);
             isPause = true;
         }
+        if (mAdView != null) {
+            mAdView.pause();
+        }
     }
 
     @Override
@@ -315,6 +323,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         if(isPause) {
             mHandler.sendEmptyMessageDelayed(0, 1000);
             isPause=false;
+        }
+        if (mAdView != null) {
+            mAdView.resume();
         }
     }
 }

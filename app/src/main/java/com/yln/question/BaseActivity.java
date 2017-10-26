@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.PushAgent;
 
 /**
  * Created by linnan.yao on 2017/10/13.
@@ -27,7 +26,7 @@ public class BaseActivity extends Activity{
 //            getWindow().getDecorView().setBackground(new ColorDrawable(Color.RED));
 //            getWindow().getDecorView().setPadding(0, Util.dip2px(getApplicationContext(), 25), 0, 0);
         }
-        PushAgent.getInstance(getApplicationContext()).onAppStart();
+//        PushAgent.getInstance(getApplicationContext()).onAppStart();
     }
 
     @Override
