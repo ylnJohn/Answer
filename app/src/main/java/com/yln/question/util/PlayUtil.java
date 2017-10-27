@@ -11,6 +11,7 @@
 package com.yln.question.util;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 
 import com.yln.question.R;
@@ -29,34 +30,49 @@ import java.io.IOException;
 public class PlayUtil {
 
 	public static void playWin(MediaPlayer player, Context context) {
-		player = MediaPlayer.create(context, R.raw.win);
-		player.setLooping(false);
-		if (!player.isPlaying()) {
-			try {
-				player.prepare();
-				player.start();
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		if(player!=null)
+			player.reset();
+		else
+			player=new MediaPlayer();
+		AssetFileDescriptor afd=context.getResources().openRawResourceFd(R.raw.win);
+//		if (!player.isPlaying()) {
+		try {
+			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
+					afd.getLength());
+			player.prepare();
+			player.setLooping(false);
+			player.setVolume(1f,1f);
+			player.start();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+//		}
 
 	}
 
 	public static void playLoss(MediaPlayer player, Context context) {
-		player = MediaPlayer.create(context, R.raw.loss);
-		player.setLooping(false);
-		if (!player.isPlaying()) {
-			try {
+		if(player!=null)
+			player.reset();
+		else
+			player=new MediaPlayer();
+		AssetFileDescriptor afd=context.getResources().openRawResourceFd(R.raw.loss);
+//		player = MediaPlayer.create(context, R.raw.loss);
+//		if (!player.isPlaying()) {
+		try {
+				player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
+						afd.getLength());
 				player.prepare();
+				player.setLooping(false);
+				player.setVolume(1f,1f);
 				player.start();
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 
 	}
 

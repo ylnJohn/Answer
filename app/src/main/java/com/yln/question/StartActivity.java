@@ -56,7 +56,9 @@ public class StartActivity extends BaseActivity implements View.OnClickListener{
             public void onAdLoaded() {
                 super.onAdLoaded();
                 Log.i("yaolinnan","onAdLoaded");
-                ad.show();
+                if(!isDestroyed()) {
+                    ad.show();
+                }
             }
 
             @Override
